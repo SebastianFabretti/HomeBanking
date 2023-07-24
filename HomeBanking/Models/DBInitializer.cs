@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using HomeBanking;
 
 namespace HomeBanking.Models
 {
@@ -32,6 +34,29 @@ namespace HomeBanking.Models
                     context.Clients.Add(client);
                 }
                 context.SaveChanges();
+            }
+
+            if (!context.Accounts.Any())
+            {
+                var accountSeba = context.Clients.FirstOrDefault(c => c.Email == "seba@gmail.com");
+                if (accountSeba != null)
+                {
+                    var accounts = new Account[]
+                    {
+                        new Account
+                        {
+                            ClientId = accountSeba.Id,
+                            CreationDate = DateTime.Now,
+                            Number = string.Empty,
+                            Balance = 0,
+                        }
+                    };
+                    foreach (Account account in accounts)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                   context.SaveChanges();
+                }
             }
         }
     }
