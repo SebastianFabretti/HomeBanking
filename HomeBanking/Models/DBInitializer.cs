@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using HomeBanking;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HomeBanking.Models
 {
@@ -22,10 +23,10 @@ namespace HomeBanking.Models
                    },
                    new Client
                    {
-                       FirstName="Sebas",
-                       LastName="Fabres",
-                       Email = "sebas@gmail.com",
-                       Password="2222"
+                       FirstName="Victor",
+                       LastName="Coronado",
+                       Email = "vcoronado@gmail.com",
+                       Password="123456"
                    },
                 };
 
@@ -39,25 +40,53 @@ namespace HomeBanking.Models
             if (!context.Accounts.Any())
             {
                 var accountSeba = context.Clients.FirstOrDefault(c => c.Email == "seba@gmail.com");
+                
                 if (accountSeba != null)
                 {
-                    var accounts = new Account[]
+                    Account[] sebaAccounts = new Account[]
                     {
                         new Account
                         {
                             ClientId = accountSeba.Id,
                             CreationDate = DateTime.Now,
-                            Number = string.Empty,
-                            Balance = 0,
+                            Number = "VIN002",
+                            Balance = 99999,
                         }
-                    };
-                    foreach (Account account in accounts)
+                    };               
+
+                    foreach (Account account in sebaAccounts)
                     {
                         context.Accounts.Add(account);
                     }
-                   context.SaveChanges();
+                   //context.SaveChanges();
                 }
             }
+
+            if (!context.Accounts.Any())
+            {
+                var accountVictor = context.Clients.FirstOrDefault(c => c.Email == "vcoronado@gmail.com");
+
+                if (accountVictor != null)
+                {
+                    Account[] victorAccounts = new Account[]
+                    {
+                        new Account
+                        {
+                            ClientId = accountVictor.Id,
+                            CreationDate = DateTime.Now,
+                            Number = "VIN001",
+                            Balance = 100000,
+                        }
+                    };
+
+                    foreach (Account account in victorAccounts)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                    //context.SaveChanges();
+                }
+            }
+            context.SaveChanges();
         }
     }
 }
