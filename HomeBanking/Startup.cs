@@ -33,6 +33,7 @@ namespace HomeBanking
             services.AddRazorPages();
             
             //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            //Decidi comentar esta linea para poder leer con mas claridad
 
             services.AddScoped<IClientRepository, ClientRepository>();
         }
