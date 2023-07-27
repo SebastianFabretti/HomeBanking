@@ -67,7 +67,7 @@ namespace HomeBanking.Controller
 
                 if (client == null)
                 {
-                    return Forbid();
+                    return NotFound();
                 }
 
                 var clientDTO = new ClientDTO

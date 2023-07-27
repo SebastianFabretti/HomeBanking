@@ -32,7 +32,7 @@ namespace HomeBanking
             
             services.AddRazorPages();
             
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddScoped<IClientRepository, ClientRepository>();
         }
@@ -58,7 +58,7 @@ namespace HomeBanking
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapControllers();
+                endpoints.MapControllers(); //Agregamos esta linea para que se puedan usar los controllers
             });
         }
     }
