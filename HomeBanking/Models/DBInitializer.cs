@@ -1,9 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
-using HomeBanking;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace HomeBanking.Models
 {
