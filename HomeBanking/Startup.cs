@@ -27,6 +27,13 @@ namespace HomeBanking
             //Agregamos el Contexto
             services.AddDbContext<HomeBankingContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("HomeBankingConexion")));
             services.AddRazorPages();
+<<<<<<< Updated upstream
+=======
+            
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
+            services.AddScoped<IClientRepository, ClientRepository>();
+>>>>>>> Stashed changes
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
