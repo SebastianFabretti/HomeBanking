@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeBanking.Models
+namespace HomeBanking.DTOS
 {
     public class AccountDTO
     {
