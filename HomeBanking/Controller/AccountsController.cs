@@ -45,7 +45,7 @@ namespace HomeBanking.Controller
                             Type = tr.Type,
                             Amount = tr.Amount,
                             Description = tr.Description,
-                            Date = DateTime.Now,                       
+                            Date = tr.Date,                       
                         }).ToList()
                     };
 
@@ -85,7 +85,7 @@ namespace HomeBanking.Controller
                         Type = tr.Type,
                         Amount = tr.Amount,
                         Description = tr.Description,
-                        Date = DateTime.Now,
+                        Date = tr.Date,
                     }).ToList()
                 };
                 return Ok(accountDTO);
