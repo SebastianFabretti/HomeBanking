@@ -30,11 +30,8 @@ namespace HomeBanking
             services.AddDbContext<HomeBankingContext>
             (opt => opt.UseSqlServer(Configuration.GetConnectionString("HomeBankingConexion")));
             
-            services.AddRazorPages();
-            
-            //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-            //Decidi comentar esta linea para poder leer con mas claridad
-
+            services.AddRazorPages();            
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddScoped<IClientRepository, ClientRepository>();
         }
 
