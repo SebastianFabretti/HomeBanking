@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Razor.Language.Extensions;
-using System;
-using System.Globalization;
+﻿using System;
 
-namespace HomeBanking.Models
+namespace HomeBanking.DTOS
 {
-    public class Card
+    public class CardDTO
     {
         public long Id { get; set; }
         public string CardHolder { get; set; }
@@ -14,8 +12,5 @@ namespace HomeBanking.Models
         public int Cvv { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ThruDate { get; set; }
-        public long ClientId { get; set; }
-        public Client Client { get; set; }
-
     }
 }
