@@ -1,5 +1,4 @@
 ﻿using HomeBanking.Models;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace HomeBanking.Repositories
@@ -9,5 +8,6 @@ namespace HomeBanking.Repositories
         IEnumerable<Account> GetAllAccounts();
         Account FindById(long id);
         void Save (Account account);
+        IEnumerable<Account> GetAccountsByClient(long clientId);
     }
 }

@@ -1,3 +1,4 @@
+using HomeBanking.Controller;
 using HomeBanking.Models;
 using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -33,9 +34,15 @@ namespace HomeBanking
             
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);           
 
-            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>(); //Agregamos el scope del repositorio del cliente
             
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>(); //Agregamos el scope del repositorio de las cuentas
+
+            services.AddScoped<ICardRepository, CardRepository>(); //Agregamos el scope del repositorio de las tarjetas
+
+            services.AddScoped<AccountsController,  AccountsController>(); //Agregamos el controller de accounts
+
+            services.AddScoped<ClientsController, ClientsController>(); //Agregamos el controller de clients
 
             //autenticación
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -74,7 +81,7 @@ namespace HomeBanking
             //autorización
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>   //Agregamos el endpoint
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(

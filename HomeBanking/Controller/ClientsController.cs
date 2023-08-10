@@ -2,9 +2,11 @@
 using HomeBanking.Models;
 using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace HomeBanking.Controller
 {
@@ -12,11 +14,14 @@ namespace HomeBanking.Controller
     [ApiController]
     public class ClientsController : ControllerBase
     {
-        private IClientRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
+        private AccountsController _accountsController;
 
-        public ClientsController(IClientRepository clientRepository)
+        public ClientsController(IClientRepository clientRepository, AccountsController accountsController)
         {
             _clientRepository = clientRepository;
+            _accountsController = accountsController;
+
         }
 
         [HttpGet]
@@ -198,7 +203,7 @@ namespace HomeBanking.Controller
                 if (String.IsNullOrEmpty(client.Email) || String.IsNullOrEmpty(client.Password) || String.IsNullOrEmpty(client.FirstName) || String.IsNullOrEmpty(client.LastName))
                     return StatusCode(403, "datos inválidos");
 
-                
+                Random random = new Random();
                 Client user = _clientRepository.FindByEmail(client.Email);
 
                 if (user != null)
@@ -215,8 +220,46 @@ namespace HomeBanking.Controller
                 };
 
                 _clientRepository.Save(newClient);
-                return Created("", newClient);
+                _accountsController.PostNewClientNewAccount(newClient.Id);
 
+                return Created("", newClient);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost ("current/account")]
+        public IActionResult PostAccount()
+        {
+            try
+            {
+                string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : string.Empty;
+                if (email == string.Empty)
+                {
+                    return Forbid("Error");
+                }
+                Client client = _clientRepository.FindByEmail(email);
+
+                if (client == null)
+                {
+                    return Forbid("Error");
+                }
+
+                if (client.Accounts.Count > 2)
+                {
+                    return StatusCode(403, "Usted no puede tener mas de 3 cuentas");
+                }
+
+                var newAccount = _accountsController.PostNewClientNewAccount(client.Id);
+
+                if (newAccount == null) 
+                {
+                    return StatusCode(500, "Error en crear la cuenta");
+                }
+                
+                return Created("", newAccount);
             }
             catch (Exception ex)
             {
