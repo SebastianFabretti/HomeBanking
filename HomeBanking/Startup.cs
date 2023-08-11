@@ -1,6 +1,7 @@
 using HomeBanking.Controller;
 using HomeBanking.Models;
 using HomeBanking.Repositories;
+using HomeBanking.Repositories.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,9 +41,12 @@ namespace HomeBanking
 
             services.AddScoped<ICardRepository, CardRepository>(); //Agregamos el scope del repositorio de las tarjetas
 
+            services.AddScoped<ITransactionRepository, TransactionRepository>(); //Agregamos el scope del repositorio de transaction
+
             services.AddScoped<AccountsController,  AccountsController>(); //Agregamos el controller de accounts
 
             services.AddScoped<ClientsController, ClientsController>(); //Agregamos el controller de clients
+
 
             //autenticación
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

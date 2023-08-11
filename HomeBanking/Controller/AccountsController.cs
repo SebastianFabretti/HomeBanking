@@ -1,6 +1,6 @@
 ﻿using HomeBanking.DTOS;
 using HomeBanking.Models;
-using HomeBanking.Repositories;
+using HomeBanking.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -96,6 +96,26 @@ namespace HomeBanking.Controller
             {
                 return StatusCode(500, ex.Message);
             }
+        }
+
+        [HttpGet ("clients/current/accounts")]
+        public IActionResult GetCurrentAccounts()
+        {
+            string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : string.Empty;
+            if (email == string.Empty)
+            {
+                return Forbid();
+            }
+
+            Client client = _clientRepository.FindByEmail(email);
+
+            if (client == null)
+            {
+                return Forbid();
+            }
+
+            var currentAccounts = _accountRepository.GetAccountsByClient(client.Id);
+            return Ok(currentAccounts);
         }
 
         [HttpPost("clients/current/accounts")]

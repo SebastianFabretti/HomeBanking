@@ -1,6 +1,5 @@
 ﻿using HomeBanking.DTOS;
 using HomeBanking.Models;
-using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
@@ -10,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
 using System.Numerics;
+using HomeBanking.Repositories.Interface;
 
 namespace HomeBankingMindHub.Controllers
 {

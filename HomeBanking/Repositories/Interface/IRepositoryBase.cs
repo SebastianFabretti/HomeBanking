@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace HomeBanking.Repositories
+namespace HomeBanking.Repositories.Interface
 {
     public interface IRepositoryBase<T>
     {

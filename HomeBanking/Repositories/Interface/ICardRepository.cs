@@ -1,7 +1,7 @@
 ﻿using HomeBanking.Models;
 using System.Collections.Generic;
 
-namespace HomeBanking.Repositories
+namespace HomeBanking.Repositories.Interface
 {
     public interface ICardRepository
     {

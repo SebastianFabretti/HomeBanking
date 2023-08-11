@@ -1,6 +1,6 @@
 ﻿using HomeBanking.DTOS;
 using HomeBanking.Models;
-using HomeBanking.Repositories;
+using HomeBanking.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;

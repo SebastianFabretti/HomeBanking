@@ -1,4 +1,5 @@
 ﻿using HomeBanking.Models;
+using HomeBanking.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -44,6 +45,13 @@ namespace HomeBanking.Repositories
             return FindByCondition(account=>account.ClientId == clientId)
             .Include(account=>account.Transactions)
             .ToList();
+        }
+
+        public Account FindByAccountNumber(string number)
+        {
+            return FindByCondition(acc => acc.Number.ToUpper() == number.ToUpper())
+            .Include(account => account.Transactions)
+            .FirstOrDefault();
         }
     }
 }
