@@ -1,6 +1,6 @@
 ﻿using HomeBanking.Models;
 
-namespace HomeBanking.Repositories
+namespace HomeBanking.Repositories.Interface
 {
     public interface ITransactionRepository
     {

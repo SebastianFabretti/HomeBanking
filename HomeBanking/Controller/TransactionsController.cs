@@ -1,5 +1,4 @@
 ﻿using HomeBanking.Repositories.Interface;
-using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HomeBanking.DTOS;

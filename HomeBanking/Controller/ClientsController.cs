@@ -55,7 +55,7 @@ namespace HomeBanking.Controller
                             LoanId = cl.LoanId,
                             Name = cl.Loan.Name,
                             Amount = cl.Amount,
-                            Payments = int.Parse(cl.Payments)
+                            Payments = cl.Payments
                         }).ToList(),
                         Cards = client.Cards.Select(c => new CardDTO
                         {
@@ -112,7 +112,7 @@ namespace HomeBanking.Controller
                         LoanId = cl.LoanId,
                         Name = cl.Loan.Name,
                         Amount = cl.Amount,
-                        Payments = int.Parse(cl.Payments)
+                        Payments = cl.Payments
                     }).ToList(),
                     Cards = client.Cards.Select(c => new CardDTO
                     {
@@ -171,7 +171,7 @@ namespace HomeBanking.Controller
                         LoanId = cl.LoanId,
                         Name = cl.Loan.Name,
                         Amount = cl.Amount,
-                        Payments = int.Parse(cl.Payments)
+                        Payments = cl.Payments
                     }).ToList(),
                     Cards = client.Cards.Select(c => new CardDTO
                     {
@@ -198,8 +198,7 @@ namespace HomeBanking.Controller
         public IActionResult Post([FromBody] Client client)
         {
             try
-            {
-                
+            {              
                 if (String.IsNullOrEmpty(client.Email) || String.IsNullOrEmpty(client.Password) || String.IsNullOrEmpty(client.FirstName) || String.IsNullOrEmpty(client.LastName))
                     return StatusCode(403, "datos inválidos");
 

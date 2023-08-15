@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace HomeBanking.Repositories
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> : IClientLoanRepository<T> where T : class
     {      
         protected HomeBankingContext RepositoryContext { get; set; }
 

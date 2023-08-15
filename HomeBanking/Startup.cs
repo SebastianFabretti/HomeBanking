@@ -42,6 +42,10 @@ namespace HomeBanking
             services.AddScoped<ICardRepository, CardRepository>(); //Agregamos el scope del repositorio de las tarjetas
 
             services.AddScoped<ITransactionRepository, TransactionRepository>(); //Agregamos el scope del repositorio de transaction
+            
+            services.AddScoped<IClientLoanRepository, ClientLoanRepository>();  //Agregamos el scope del repositorio de ClientLoan
+            
+            services.AddScoped<ILoanRepository, LoanRepository>();  //Agregamos el scope del repositorio de loan
 
             services.AddScoped<AccountsController,  AccountsController>(); //Agregamos el controller de accounts
 

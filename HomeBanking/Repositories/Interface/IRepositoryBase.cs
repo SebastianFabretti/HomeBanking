@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace HomeBanking.Repositories.Interface
 {
-    public interface IRepositoryBase<T>
+    public interface IClientLoanRepository<T>
     {
         IQueryable<T> FindAll();
         IQueryable<T> FindAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null);
