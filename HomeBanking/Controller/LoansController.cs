@@ -86,29 +86,29 @@ namespace HomeBanking.Controller
 
                 if (loan == null)
                 {
-                    return Forbid("Prestamo no encontrado");
+                    return StatusCode(403, "Prestamo no encontrado");
                 }
 
                 if (loanApplicationDTO.Amount > loan.MaxAmount)
                 {
-                    return Forbid("El prestamo que usted esta pidiendo es mayor al maximo permitido");
+                    return StatusCode(403, "El prestamo que usted esta pidiendo es mayor al maximo permitido");
                 }
 
                 if (1 > loanApplicationDTO.Amount)
                 {
-                    return Forbid("Usted puso un monto invalido");
+                    return StatusCode(403, "Usted puso un monto invalido");
                 }
 
                 if (loanApplicationDTO.Payments == null)
                 {
-                    return Forbid("Usted no puso en cuantas cuotas va a pagar el prestamo");
+                    return StatusCode(403, "Usted no puso en cuantas cuotas va a pagar el prestamo");
                 }
 
                 var account = _accountRepository.FindByAccountNumber(loanApplicationDTO.ToAccountNumber);                
 
                 if (account == null)
                 {
-                    return Forbid("La cuenta seleccionada es inexistente");
+                    return StatusCode(403, "La cuenta seleccionada es inexistente");
                 }
 
                 var clientLoan = new ClientLoan

@@ -229,37 +229,37 @@ namespace HomeBanking.Controller
                 
                 if (newClient.FirstName.Length < 3)
                 {
-                    return Forbid("El nombre debe tener un minimo de 3 letras");
+                    return StatusCode(403, "El nombre debe tener un minimo de 3 letras");
                 }
 
                 if (newClient.LastName.Length < 3)
                 {
-                    return Forbid("El apellido debe tener un minimo de 3 letras");
+                    return StatusCode(403, "El apellido debe tener un minimo de 3 letras");
                 }
 
                 if (!matchFirstName.Success) 
                 {
-                    return Forbid("El nombre contiene caracteres especiales");
+                    return StatusCode(403, "El nombre contiene caracteres especiales");
                 }
 
                 if (!matchLastName.Success)
                 {
-                    return Forbid("El nombre contiene caracteres especiales");
+                    return StatusCode(403, "El nombre contiene caracteres especiales");
                 }
 
                 if (!matchEmail.Success)
                 {
-                    return Forbid("El email no es valido");
+                    return StatusCode(403, "El email no es valido");
                 }
 
                 if (newClient.Password.Length < 8)
                 {
-                    return Forbid("El minimo de caracteres para la contraseña es de 8");
+                    return StatusCode(403, "El minimo de caracteres para la contraseña es de 8");
                 }
 
                 if (!_clientRepository.ValidatePassword(newClient.Password))
                 {
-                    return Forbid("Contraseña invalida");
+                    return StatusCode(403, "Contraseña invalida");
                 }
 
                 _clientRepository.Save(newClient);
@@ -281,13 +281,13 @@ namespace HomeBanking.Controller
                 string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : string.Empty;
                 if (email == string.Empty)
                 {
-                    return Forbid("Error");
+                    return StatusCode(403, "Error");
                 }
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("Error");
+                    return StatusCode(403, "Error");
                 }
 
                 if (client.Accounts.Count > 2)
@@ -299,7 +299,7 @@ namespace HomeBanking.Controller
 
                 if (newAccount == null) 
                 {
-                    return StatusCode(500, "Error en crear la cuenta");
+                    return StatusCode(403, "Error en crear la cuenta");
                 }
                 
                 return Created("", newAccount);

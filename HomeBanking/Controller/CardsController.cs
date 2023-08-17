@@ -57,7 +57,7 @@ namespace HomeBanking.Controller
 
                 if (email == string.Empty)
                 {
-                    return Forbid();
+                    return StatusCode(403, "El email esta vacio");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);

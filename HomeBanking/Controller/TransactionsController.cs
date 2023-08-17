@@ -32,47 +32,47 @@ namespace HomeBanking.Controller
                 string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : string.Empty;
                 if (email == string.Empty)
                 {
-                    return Forbid("No hay email");
+                    return StatusCode(403, "No hay email");
                 }
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("Cliente inexistente");
+                    return StatusCode(403, "Cliente inexistente");
                 }
 
                 if (transferDTO.FromAccountNumber == string.Empty || transferDTO.ToAccountNumber == string.Empty)
                 {
-                    return Forbid("Falto la cuenta de origen o de destino"); 
+                    return StatusCode(403, "Falto la cuenta de origen o de destino"); 
                 }
 
                 if (transferDTO.FromAccountNumber == transferDTO.ToAccountNumber)
                 {
-                    return Forbid("Transferencia invalida, estas transfiriendo dinero de una cuenta a esa misma cuenta");
+                    return StatusCode(403, "Transferencia invalida, estas transfiriendo dinero de una cuenta a esa misma cuenta");
                 }
 
                 if (transferDTO.Amount == 0 || transferDTO.Description == string.Empty)
                 {
-                    return Forbid("Falto el monto o la descripcion de la transferencia");
+                    return StatusCode(403, "Falto el monto o la descripcion de la transferencia");
                 }
 
                 Account fromAccount = _accountRepository.FindByAccountNumber(transferDTO.FromAccountNumber);
                 
                 if (fromAccount == null)
                 {
-                    return Forbid("Cuenta de origen no existe");
+                    return StatusCode(403, "Cuenta inexistente"); ;
                 }
 
                 if (transferDTO.Amount > fromAccount.Balance)
                 {
-                    return Forbid("Fondos insuficientes");
+                    return StatusCode(403, "Fondos insuficientes");
                 }
 
                 Account toAccount = _accountRepository.FindByAccountNumber(transferDTO.ToAccountNumber);
                 
                 if (toAccount == null)
                 {
-                    return Forbid("Cuenta de destino no existente");
+                    return StatusCode(403, "Cuenta de destino no existente");
                 }
 
                _transactionRepository.Save(new Transaction
