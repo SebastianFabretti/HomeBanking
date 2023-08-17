@@ -3,6 +3,7 @@ using HomeBanking.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace HomeBanking.Repositories
 {
@@ -46,6 +47,19 @@ namespace HomeBanking.Repositories
             .ThenInclude(cl => cl.Loan)
             .Include(client => client.Cards)
             .FirstOrDefault();
+        }
+
+        public bool ValidatePassword(string password)
+        {
+            string upperPassword = @"[A-Z]";
+            string lowerPassword = @"[a-z]";
+            string specialPassword = @"[\W_]";
+
+            bool hasUpper = Regex.IsMatch(password, upperPassword);
+            bool hasLower = Regex.IsMatch(password, lowerPassword);
+            bool hasSpecial = Regex.IsMatch(password, specialPassword);
+
+            return hasUpper && hasLower && hasSpecial;
         }
     }
 }
