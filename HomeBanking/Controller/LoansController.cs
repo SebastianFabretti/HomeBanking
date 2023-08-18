@@ -128,6 +128,11 @@ namespace HomeBanking.Controller
                     Description = "Prestamo"
                 };
 
+                if (newTransaction.Type != CardType.CREDIT.ToString() && newTransaction.Type != CardType.DEBIT.ToString())
+                {
+                    return StatusCode(403, "El tipo de tarjeta es no existente");
+                }
+                
                 account.Balance = account.Balance + clientLoan.Amount;
                 clientLoan.Amount = clientLoan.Amount * loadInterestRate;
 
@@ -135,7 +140,7 @@ namespace HomeBanking.Controller
                 _accountRepository.Save(account);
                 _clientLoanRepository.Save(clientLoan);
              
-                return Created("", clientLoan); //Transaccion no se guarda, chequear si hay un problema en la logica o en el front.                
+                return Created("", clientLoan);                 
             }
 
             catch (Exception ex)
