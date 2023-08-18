@@ -13,7 +13,7 @@ using HomeBanking.Repositories.Interface;
 
 namespace HomeBankingMindHub.Controllers
 {
-    [Route("api")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
