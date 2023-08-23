@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace HomeBanking.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
     {
@@ -62,7 +62,7 @@ namespace HomeBanking.Controller
             }
         }
 
-        [HttpGet("[controller]/{id}")]
+        [HttpGet("{id}")]
 
         public IActionResult Get(long id)
         {
